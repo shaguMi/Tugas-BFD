@@ -1,3 +1,4 @@
+import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,8 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        label = new JLabel("Programming is fun");
+        String textLabel = new String("Programming is fun");
+        label = new JLabel(textLabel);
         label.setFont(new Font("Calibri", Font.PLAIN, 20));
         label.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, java.awt.Color.black));
         redRadioButton = new JRadioButton("Red");
@@ -85,21 +87,20 @@ public class Window extends JFrame {
     }
 
     private void moveLabelLeft() {
-        Point currentLocation = label.getLocation();
-        int newX = currentLocation.x - 10;
-        if (newX >= 0) {
-            label.setLocation(newX, currentLocation.y);
+        StringBuilder sb = new StringBuilder(label.getText());
+        
+        if(sb.charAt(0) == ' ')
+        {
+            sb.deleteCharAt(0);
+            label.setText(sb.toString());
         }
     }
 
     private void moveLabelRight() {
-        Point currentLocation = label.getLocation();
-        int newX = currentLocation.x + 10;
-        int labelWidth = label.getWidth();
-        int windowWidth = getWidth();
-        if (newX + labelWidth <= windowWidth) {
-            label.setLocation(newX, currentLocation.y);
-        }
+        StringBuilder sb = new StringBuilder(label.getText());
+        
+        sb.insert(0, ' ');
+        label.setText(sb.toString());
     }
 
     public static void main(String[] args) {
@@ -109,3 +110,4 @@ public class Window extends JFrame {
         });
     }
 }
+
